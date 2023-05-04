@@ -43,25 +43,29 @@ function init() {
     }
   });
   
-  volumeSlider.addEventListener('input', () => {
-    // Set the volume icon based on the volume level
-    const volumeLevel = volumeSlider.value;
-    if (volumeLevel == 0) {
-      volumeIcon.src = './assets/icons/volume-level-0.svg';
-      honkButton.disabled = true; // disable the honk button if volume is muted
-    } else if (volumeLevel < 33) {
-      volumeIcon.src = './assets/icons/volume-level-1.svg';
-      honkButton.disabled = false;
-    } else if (volumeLevel < 67) {
-      volumeIcon.src = './assets/icons/volume-level-2.svg';
-      honkButton.disabled = false;
+  // Set volume level and icon based on slider value
+  volumeSlider.addEventListener("input", () => {
+    const volumeValue = volumeSlider.value;
+    if (volumeValue == 0) {
+      volume0Icon.style.display = "inline-block";
+      volume1Icon.style.display = "none";
+      volume2Icon.style.display = "none";
+    } else if (volumeValue < 33) {
+      volume0Icon.style.display = "none";
+      volume1Icon.style.display = "inline-block";
+      volume2Icon.style.display = "none";
+    } else if (volumeValue < 67) {
+      volume0Icon.style.display = "none";
+      volume1Icon.style.display = "none";
+      volume2Icon.style.display = "inline-block";
     } else {
-      volumeIcon.src = './assets/icons/volume-level-3.svg';
-      honkButton.disabled = false;
+      volume0Icon.style.display = "none";
+      volume1Icon.style.display = "none";
+      volume2Icon.style.display = "inline-block";
     }
-      // Set the volume of the audio element
-      audio.volume = volumeLevel / 100;
-    });
+    audioElement.volume = volumeValue / 100;
+  });
+  
   
   // Play audio and display confetti if Party Horn is selected
   playButton.addEventListener("click", () => {
