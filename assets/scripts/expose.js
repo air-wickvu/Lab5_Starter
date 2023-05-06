@@ -9,18 +9,12 @@ function init() {
   const playButton = document.querySelector("button");
   const hornImage = document.querySelector("img");
   const audioElement = document.querySelector("audio");
-  const volumeIcons = document.querySelectorAll("div > img");
-  
+  const volumeIcon = document.querySelector("[src='assets/icons/volume-level-2.svg']");
   // Load audio files
   const airHornSound = new Audio("assets/audio/air-horn.mp3");
   const carHornSound = new Audio("assets/audio/car-horn.mp3");
   const partyHornSound = new Audio("assets/audio/party-horn.mp3");
   
-  // Set volume icons
-  const volumeIconArray = Array.from(volumeIcons);
-  const volume0Icon = volumeIconArray[0];
-  const volume1Icon = volumeIconArray[1];
-  const volume2Icon = volumeIconArray[2];
   
   // Set horn image and audio based on selection
   hornSelect.addEventListener("change", () => {
@@ -46,24 +40,25 @@ function init() {
   // Set volume level and icon based on slider value
   volumeSlider.addEventListener("input", () => {
     const volumeValue = volumeSlider.value;
-    if (volumeValue == 0) {
-      volume0Icon.style.display = "inline-block";
-      volume1Icon.style.display = "none";
-      volume2Icon.style.display = "none";
-    } else if (volumeValue < 33) {
-      volume0Icon.style.display = "none";
-      volume1Icon.style.display = "inline-block";
-      volume2Icon.style.display = "none";
-    } else if (volumeValue < 67) {
-      volume0Icon.style.display = "none";
-      volume1Icon.style.display = "none";
-      volume2Icon.style.display = "inline-block";
-    } else {
-      volume0Icon.style.display = "none";
-      volume1Icon.style.display = "none";
-      volume2Icon.style.display = "inline-block";
-    }
     audioElement.volume = volumeValue / 100;
+    if (volumeValue == 0) {
+
+      volumeIcon.src = "assets/icons/volume-level-0.svg";
+
+    } else if (volumeValue < 33) {
+
+      volumeIcon.src = "assets/icons/volume-level-1.svg";
+
+    } else if (volumeValue < 67) {
+
+      volumeIcon.src = "assets/icons/volume-level-2.svg";
+
+    } else {
+
+      volumeIcon.src = "assets/icons/volume-level-3.svg";
+
+    }
+    
   });
   
   
