@@ -14,8 +14,9 @@ function init() {
   const airHornSound = new Audio("assets/audio/air-horn.mp3");
   const carHornSound = new Audio("assets/audio/car-horn.mp3");
   const partyHornSound = new Audio("assets/audio/party-horn.mp3");
+  const jsConfetti = new JSConfetti();
   
-  
+
   // Set horn image and audio based on selection
   hornSelect.addEventListener("change", () => {
     const selectedHorn = hornSelect.value;
@@ -66,9 +67,9 @@ function init() {
   playButton.addEventListener("click", () => {
     audioElement.play();
     if (hornSelect.value === "party-horn") {
-      confetti.start();
+      jsConfetti.addConfetti();
       setTimeout(() => {
-        confetti.stop();
+        jsConfetti.clearCanvas();
       }, 3000);
     }
   });
